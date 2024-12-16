@@ -1,8 +1,20 @@
-# Betrieb von paperless-ngx mit Docker Desktop für Windows
+# Betrieb von paperless-ngx mit Rancher Desktop für Windows
 
 ## Rancher Desktop
 
 * Download: <https://rancherdesktop.io/>
+
+### Images bereitstellen
+
+WSL-Konsole:
+
+```bash
+docker pull redis:7
+docker pull postgres:latest
+docker pull gotenberg/gotenberg:8.7
+docker pull apache/tika:latest
+docker pull paperlessngx/paperless-ngx:latest
+```
 
 ### Notizen
 
@@ -10,21 +22,6 @@
   > ~~wsl --install~~
 * Lokaler Datenträger:
   > %LOCALAPPDATA%\rancher-desktop\distro-data
-
-## PostgreSQL
-
-* Öffnen der WSL-Konsole
-* > docker pull postgres
-
-### docker run
-
-> docker run -it -e "POSTGRES_PASSWORD=paperless-ngx" --rm postgres
-
-## pgAdmin4
-
-### docker run
-
-> docker run -it -e "PGADMIN_DEFAULT_EMAIL=tobias@kral.ws" -e "PGADMIN_DEFAULT_PASSWORD=test" --rm dpage/pgadmin4
 
 ## paperless-ngx
 
@@ -39,17 +36,34 @@
 <https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.env>
 ([RAW](https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/refs/heads/main/docker/compose/docker-compose.env))
 
+Hier die für Ranger Desktop angepasste [docker-compose.yml](./paperless-ngx/docker-compose.yml) und [docker-compose.env](./paperless-ngx/docker-compose.env).
 
-
-### Deployment
+### Dienste starten
 
 ```bash
+cd /mnt/c/Users/tobia/Git/paperless-ngx/paperless-ngx/
 docker-compose pull
 docker-compose run --rm webserver createsuperuser
 docker-compose up -d
 ```
 
-### Variante 'docker pull'
+### Dienste beenden
 
-* Öffnen der WSL-Konsole
-* > docker pull paperlessngx/paperless-ngx
+```bash
+cd /mnt/c/Users/tobia/Git/paperless-ngx/paperless-ngx/
+docker-compose down
+```
+
+## Optional: pgAdmin4
+
+WSL-Konsole:
+
+```bash
+docker pull dpage/pgadmin4
+```
+
+### docker run
+
+```bash
+docker run -it -e "PGADMIN_DEFAULT_EMAIL=tobias@kral.ws" -e "PGADMIN_DEFAULT_PASSWORD=test" --rm dpage/pgadmin4
+```
