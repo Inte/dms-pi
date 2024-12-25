@@ -45,7 +45,7 @@ Hier die für Ranger Desktop angepasste [docker-compose.yml](./paperless-ngx/doc
 ### Dienste starten
 
 ```bash
-cd /mnt/c/Users/tobia/Git/paperless-ngx/paperless-ngx/
+cd /mnt/c/Users/tobia/Git/dms-pi/paperless-ngx/
 docker-compose pull
 docker-compose run --rm webserver createsuperuser
 docker-compose up -d
@@ -54,7 +54,7 @@ docker-compose up -d
 ### Dienste beenden
 
 ```bash
-cd /mnt/c/Users/tobia/Git/paperless-ngx/paperless-ngx/
+cd /mnt/c/Users/tobia/Git/dms-pi/paperless-ngx/
 docker-compose down
 ```
 
