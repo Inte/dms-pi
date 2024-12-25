@@ -19,9 +19,13 @@ docker pull paperlessngx/paperless-ngx:latest
 ### Notizen
 
 * Kein manuelles Installieren einer Linux Distribution notwendig:
-  > ~~wsl --install~~
+  ```bash
+  # wsl --install
+  ```
 * Lokaler Datenträger:
-  > %LOCALAPPDATA%\rancher-desktop\distro-data
+  ```bash
+  %LOCALAPPDATA%\rancher-desktop\distro-data
+  ```
 
 ## paperless-ngx
 
