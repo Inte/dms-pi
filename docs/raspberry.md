@@ -1,4 +1,4 @@
-# Betrieb von paperless-ngx auf einem Raspberry Pi
+# Vorbereitung des Raspberry Pi
 
 ## Testumgebung
 
