@@ -1,5 +1,5 @@
 # K3s Konfigurationsdatei
 data-dir: /mnt/hat/k3s
 write-kubeconfig: /mnt/hat/k3s/kubeconfig.yaml
-token: my_secure_token  # Ersetzen durch einen sicheren Token
-node-name: my-k3s-node  # Optional: Name des Nodes
+# token: my_secure_token  # Ersetzen durch einen sicheren Token
+# node-name: my-k3s-node  # Optional: Name des Nodes
