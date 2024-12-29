@@ -5,7 +5,7 @@ set -e
 BOOTSTRAP_CONF_URL="https://raw.githubusercontent.com/Inte/dms-pi/refs/heads/main/autopilot/dms-pi.conf"
 BOOTSTRAP_CONF_FILE="/etc/dms-pi.conf"
 
-echo "===== Bootstrap: Herunterladen und Einrichten der Konfigurationsdatei ====="
+echo "===== Bootstrap - Start ====="
 
 # Überprüfen, ob das Skript mit Root-Rechten ausgeführt wird
 if [ "$(id -u)" -ne 0 ]; then
@@ -28,4 +28,4 @@ echo "Setzen der Berechtigungen für $BOOTSTRAP_CONF_FILE ..."
 chmod 600 "$BOOTSTRAP_CONF_FILE"
 chown root:root "$BOOTSTRAP_CONF_FILE"
 
-echo "===== Bootstrap abgeschlossen. Die Konfigurationsdatei wurde erfolgreich eingerichtet. ====="
+echo "===== Bootstrap - Ende ====="

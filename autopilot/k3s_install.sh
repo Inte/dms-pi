@@ -5,6 +5,8 @@ set -e
 # Standardpfad zur zentralen Konfigurationsdatei
 DMS_PI_CONF="/etc/dms-pi.conf"
 
+echo "===== K3s Installation - Start ====="
+
 # Konfigurationsdatei einlesen
 if [ -f "$DMS_PI_CONF" ]; then
     source "$DMS_PI_CONF"
@@ -63,3 +65,5 @@ else
     echo "Fehler: Token-Datei nicht gefunden unter ${K3S_INSTALL_TOKEN_PATH}."
     exit 1
 fi
+
+echo "===== K3s Installation - Ende ====="

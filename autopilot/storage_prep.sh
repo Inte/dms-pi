@@ -5,6 +5,8 @@ set -e
 # Standardpfad zur zentralen Konfigurationsdatei
 DMS_PI_CONF="/etc/dms-pi.conf"
 
+echo "===== Storage Vorbereitung - Start ====="
+
 # Konfigurationsdatei einlesen
 if [ -f "$DMS_PI_CONF" ]; then
     source "$DMS_PI_CONF"
@@ -84,7 +86,12 @@ sudo systemctl daemon-reload
 
 # 10. Festplatte einhängen
 echo "Festplatte wird eingehängt..."
-sudo mount -a
+if sudo mount -a; then
+  echo "Die Festplatte $DEVICE wurde erfolgreich vorbereitet und eingehängt unter $MOUNT_POINT."
+  echo "Überprüfen Sie den Einhängepunkt mit: ls $MOUNT_POINT"
+else
+  echo "Fehler: Festplatte konnte nicht eingehängt werden."
+  exit 1
+fi
 
-echo "===== Die Festplatte $DEVICE wurde erfolgreich vorbereitet und eingehängt unter $MOUNT_POINT. ====="
-echo "Überprüfen Sie den Einhängepunkt mit: ls $MOUNT_POINT"
+echo "===== Storage Vorbereitung - Ende ====="

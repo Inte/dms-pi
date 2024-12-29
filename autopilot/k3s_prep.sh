@@ -5,6 +5,8 @@ set -e
 # Standardpfad zur zentralen Konfigurationsdatei
 DMS_PI_CONF="/etc/dms-pi.conf"
 
+echo "===== K3s Vorbereitung - Start ====="
+
 # Prüfen, ob die Konfigurationsdatei existiert
 if [ -f "$DMS_PI_CONF" ]; then
     source "$DMS_PI_CONF"
@@ -28,3 +30,5 @@ for var in $(compgen -v | grep -E '^K3S_PREP_CGROUP_'); do
         sudo sed -i "1 s|$| $param|" "$TARGET_FILE"
     fi
 done
+
+echo "===== K3s Vorbereitung - Ende ====="
