@@ -25,7 +25,7 @@ fi
 
 # Dateiberechtigungen setzen
 echo "Setzen der Berechtigungen für $BOOTSTRAP_CONF_FILE ..."
-chmod 600 "$BOOTSTRAP_CONF_FILE"
+chmod 644 "$BOOTSTRAP_CONF_FILE"
 chown root:root "$BOOTSTRAP_CONF_FILE"
 
 echo "===== Bootstrap - Ende ====="
