@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx-db
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx-db
+    spec:
+      containers:
+        - name: db
+          image: postgres
+          env:
+            - name: POSTGRES_DB
+              value: "paperless-ngx"
+            - name: POSTGRES_USER
+              value: "paperless-ngx"
+            - name: POSTGRES_PASSWORD
+              value: "paperless-ngx"
+          volumeMounts:
+            - mountPath: /mnt/hat/postgres
+              name: paperless-ngx-db-pvc-pgdata
+      volumes:
+        - name: paperless-ngx-db-pvc-pgdata
+          persistentVolumeClaim:
+            claimName: paperless-ngx-db-pvc-pgdata

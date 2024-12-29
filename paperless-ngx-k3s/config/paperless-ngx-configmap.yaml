@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paperless-ngx-env
+data:
+  PAPERLESS_ADMIN_USER: "paperless-ngx"
+  PAPERLESS_ADMIN_PASSWORD: "paperless-ngx"
+  PAPERLESS_URL: "http://paperless-ngx.example.com"
+  PAPERLESS_REDIS: "redis://paperless-ngx-broker:6379"
+  PAPERLESS_DBHOST: "paperless-ngx-db"
+  PAPERLESS_DBNAME: "paperless-ngx"
+  PAPERLESS_TIKA_ENABLED: "1"
+  PAPERLESS_TIKA_GOTENBERG_ENDPOINT: "http://paperless-ngx-gotenberg:3000"
+  PAPERLESS_TIKA_ENDPOINT: "http://paperless-ngx-tika:9998"
+  PAPERLESS_TIME_ZONE: "Europe/Berlin"
+  PAPERLESS_OCR_LANGUAGE: "deu"
+  PAPERLESS_DBUSER: "paperless-ngx"
+  PAPERLESS_DBPASS: "paperless-ngx"

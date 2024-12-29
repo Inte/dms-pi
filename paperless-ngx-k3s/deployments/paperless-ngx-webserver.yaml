@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx-webserver
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx-webserver
+    spec:
+      containers:
+        - name: webserver
+          image: paperlessngx/paperless-ngx:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: paperless-ngx-env
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: paperless-ngx-webserver-pvc-data
+            - mountPath: /usr/src/paperless/media
+              name: paperless-ngx-webserver-pvc-media
+            - mountPath: /usr/src/paperless/export
+              name: paperless-ngx-webserver-pvc-export
+            - mountPath: /usr/src/paperless/consume
+              name: paperless-ngx-webserver-pvc-consume
+      volumes:
+        - name: paperless-ngx-webserver-pvc-data
+          persistentVolumeClaim:
+            claimName: paperless-ngx-webserver-pvc-data
+        - name: paperless-ngx-webserver-pvc-media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-webserver-pvc-media
+        - name: paperless-ngx-webserver-pvc-export
+          persistentVolumeClaim:
+            claimName: paperless-ngx-webserver-pvc-export
+        - name: paperless-ngx-webserver-pvc-consume
+          persistentVolumeClaim:
+            claimName: paperless-ngx-webserver-pvc-consume

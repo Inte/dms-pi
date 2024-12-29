@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-tika
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx-tika
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx-tika
+    spec:
+      containers:
+        - name: tika
+          image: apache/tika:latest
+
