@@ -28,9 +28,9 @@ Führen Sie folgenden Befehl aus, um das Skript herunterzuladen und direkt auszu
 curl -sfL https://raw.githubusercontent.com/Inte/dms-pi/refs/heads/main/autopilot/k3s_install.sh | sudo sh -
 ```
 
-### Paperless-ngx Installation
+### Paperless-ngx Vorarbeiten
 
 Führen Sie folgenden Befehl aus, um das Skript herunterzuladen und direkt auszuführen:
 ```bash
-curl -sfL https://raw.githubusercontent.com/Inte/dms-pi/refs/heads/main/autopilot/paperless-ngx_install.sh | sh -
+curl -sfL https://raw.githubusercontent.com/Inte/dms-pi/refs/heads/main/autopilot/paperless-ngx_prep.sh | sh -
 ```
