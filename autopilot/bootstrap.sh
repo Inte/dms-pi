@@ -8,7 +8,7 @@ BOOTSTRAP_CONF_FILE="/etc/dms-pi.conf"
 echo "===== Bootstrap: Herunterladen und Einrichten der Konfigurationsdatei ====="
 
 # Überprüfen, ob das Skript mit Root-Rechten ausgeführt wird
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
   echo "Bitte führen Sie dieses Skript als Root aus (sudo $0)."
   exit 1
 fi
