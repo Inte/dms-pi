@@ -67,3 +67,7 @@ else
 fi
 
 echo "===== K3s Installation - Ende ====="
+
+echo "===== Helm Installation - Start ====="
+curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+echo "===== Helm Installation - Ende ====="

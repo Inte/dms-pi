@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: paperless-ngx-webserver
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "paperless-ngx.example"
 spec:
   ports:
     - port: 80

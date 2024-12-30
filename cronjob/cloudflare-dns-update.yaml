@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloudflare-dns-update
+  namespace: default
+spec:
+  schedule: "*/5 * * * *" # Alle 5 Minuten
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cloudflare-dns-update
+            image: curlimages/curl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              CURRENT_IP=$(curl -s ifconfig.me)
+              RECORD_IP=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records/$CF_RECORD_ID" \
+                  -H "Authorization: Bearer $CF_API_TOKEN" \
+                  -H "Content-Type: application/json" | grep -o '"content":"[^"]*' | sed 's/"content":"//')
+              if [ "$CURRENT_IP" != "$RECORD_IP" ]; then
+                  echo "Aktualisiere DNS-Record mit neuer IP: $CURRENT_IP"
+                  curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records/$CF_RECORD_ID" \
+                      -H "Authorization: Bearer $CF_API_TOKEN" \
+                      -H "Content-Type: application/json" \
+                      --data "{\"type\":\"A\",\"name\":\"$DNS_NAME\",\"content\":\"$CURRENT_IP\",\"ttl\":120,\"proxied\":false}"
+              else
+                  echo "Die öffentliche IP-Adresse hat sich nicht geändert."
+              fi
+            env:
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-secrets
+                  key: CF_API_TOKEN
+            - name: CF_ZONE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-secrets
+                  key: CF_ZONE_ID
+            - name: CF_RECORD_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-secrets
+                  key: CF_RECORD_ID
+            - name: DNS_NAME
+              value: "dms.digikral.de"
+          restartPolicy: OnFailure

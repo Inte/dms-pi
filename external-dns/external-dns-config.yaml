@@ -1,0 +1,26 @@
+provider:
+  name: cloudflare                # This is the name of your DNS provider
+env:
+  - name: CF_API_TOKEN            # This is the environment variable where ExternalDNS expects to find the access token, which varies by provider so if you're not using CloudFlare, make sure you check the documentation
+    valueFrom:
+      secretKeyRef:
+        name: api-key-cloudflare  # This should have the same name of the secret created above
+        key: apiKey
+
+extraArgs:
+  - --zone-id-filter=YOUR_ZONE_ID # This is useful if you have multiple zones (domains) in the same DNS provider, so ExternalDNS only monitors one
+  - --traefik-disable-legacy      # Disable listeners on Resources under traefik.containo.us
+
+sources:                          # I'm using the Gateway, Service and Traefik as sources, the default is ingress and services only
+#  - gateway-httproute             # This is to analyze the Gateway HTTPRoute
+#  - traefik-proxy                 # This is to analyze Traefik's IngressRoute
+  - service
+#  - ingress
+
+txtOwnerId: external-dns          # The value used to check records ownership with the standard ownership mechanism, TXT records
+
+policy: sync                      # How DNS records are synchronized between sources and providers; available values are `sync` & `upsert-only`. upsert-only doesn't delete records
+
+interval: 1m                      # This is the interval between DNS update, defaults to 1m
+
+# logLevel: debug                 # Uncomment this one to get a bit more logging, but don't get your hopes up, it's not nearly verbose enough...

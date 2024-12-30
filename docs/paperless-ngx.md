@@ -33,7 +33,7 @@ sudo kubectl apply -f deployments/paperless-ngx-webserver.yaml
 sudo kubectl apply -f services/paperless-ngx-webserver-service.yaml
 
 # Traefik
-sudo kubectl apply -f ingress/paperless-ngx-ingress.yaml 
+sudo kubectl apply -f ingress/paperless-ngx-ingress.yaml
 ```
 
 ## Status der PVC prüfen
